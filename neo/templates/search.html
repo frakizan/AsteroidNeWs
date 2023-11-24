@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>NASA NeoWs App - Search Results</h1>
+
+        <a href="{{ url_for('home') }}" class="button">Home</a>
+        
+        <div class="asteroid-info">
+            <div class="info-item"><strong>Name:</strong> {{ neo_data.name }}</div>
+            <div class="info-item"><strong>Designation:</strong> {{ neo_data.designation }}</div>
+            <div class="info-item"><strong>Absolute Magnitude (H):</strong> {{ neo_data.absolute_magnitude_h }}</div>
+            <div class="info-item"><strong>Estimated Diameter (km):</strong> {{ neo_data.estimated_diameter.kilometers.estimated_diameter_min }} - {{ neo_data.estimated_diameter.kilometers.estimated_diameter_max }}</div>
+            <div class="info-item"><strong>Potentially Hazardous:</strong> {{ neo_data.is_potentially_hazardous_asteroid }}</div>
+            <div class="info-item">
+                <strong>Close Approach Dates:</strong>
+                <ul>
+                    {% for approach in neo_data.close_approach_data %}
+                        <li>{{ approach.close_approach_date_full }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

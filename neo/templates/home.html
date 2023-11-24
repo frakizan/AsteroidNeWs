@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>NASA NeoWs App</h1>
+    
+    <form action="{{ url_for('search') }}" method="post">
+        <label for="neo_id">Enter Asteroid ID:</label>
+        <input type="text" id="neo_id" name="neo_id" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="asteroid-ids">
+        <h2>Common Asteroid IDs</h2>
+        <ul>
+            {% for neo_id in all_ids %}
+                <li class="id-item">
+                    {{ neo_id }}
+                    <form action="{{ url_for('search') }}" method="post" style="display:inline;">
+                        <input type="hidden" name="neo_id" value="{{ neo_id }}">
+                        <button type="submit">Search ID</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
